@@ -1,0 +1,7 @@
+name: AntiToolBox
+main: me.liuli.atb.AntiToolBox
+version: "1.0"
+api: ["1.0.0"]
+author: "Liulihaocai"
+depend:
+  - "KotlinLib"
