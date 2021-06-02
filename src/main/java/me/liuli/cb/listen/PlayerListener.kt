@@ -8,15 +8,15 @@ import cn.nukkit.event.player.PlayerQuitEvent
 import me.liuli.cb.CheatBlocker
 
 class PlayerListener : Listener {
-    private val checkManager= CheatBlocker.getInstance().checkManager
+    private val checkManager = CheatBlocker.getInstance().checkManager
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    fun onPlayerJoin(event: PlayerJoinEvent){
+    fun onPlayerJoin(event: PlayerJoinEvent) {
         checkManager.handlePlayerJoin(event)
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    fun onPlayerQuit(event: PlayerQuitEvent){
+    fun onPlayerQuit(event: PlayerQuitEvent) {
         checkManager.handlePlayerLeave(event)
     }
 }

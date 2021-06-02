@@ -8,20 +8,20 @@ import cn.nukkit.event.server.DataPacketSendEvent
 import me.liuli.cb.CheatBlocker
 
 class PacketListener : Listener {
-    private val checkManager=CheatBlocker.getInstance().checkManager
+    private val checkManager = CheatBlocker.getInstance().checkManager
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    fun onPacketReceive(event: DataPacketReceiveEvent){
+    fun onPacketReceive(event: DataPacketReceiveEvent) {
         event.player ?: return
-        if(checkManager.handlePacketIn(event)){
+        if (checkManager.handlePacketIn(event)) {
             event.setCancelled()
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    fun onPacketSend(event: DataPacketSendEvent){
+    fun onPacketSend(event: DataPacketSendEvent) {
         event.player ?: return
-        if(checkManager.handlePacketOut(event)){
+        if (checkManager.handlePacketOut(event)) {
             event.setCancelled()
         }
     }

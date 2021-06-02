@@ -10,17 +10,17 @@ open class TheConfig(configName: String) {
 
     init {
         // check file exists
-        val configFile=File(CheatBlocker.getInstance().dataFolder,configName)
-        if(!configFile.exists()){
-            FileUtils.writeFile(configFile,FileUtils.getTextFromResource(configName))
+        val configFile = File(CheatBlocker.getInstance().dataFolder, configName)
+        if (!configFile.exists()) {
+            FileUtils.writeFile(configFile, FileUtils.getTextFromResource(configName))
         }
-        config=Config(configFile, Config.YAML)
+        config = Config(configFile, Config.YAML)
 
         // read data to vars
-        val fields=this.javaClass.fields
-        for (field in fields){
+        val fields = this.javaClass.fields
+        for (field in fields) {
             field.annotations.forEach {
-                if(it is ConfigField){
+                if (it is ConfigField) {
                     field.set(this, config.get(it.yamlSection))
                 }
             }

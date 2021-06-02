@@ -1,6 +1,5 @@
 package me.liuli.cb.checks
 
-import cn.nukkit.Player
 import cn.nukkit.network.protocol.MovePlayerPacket
 import me.liuli.cb.data.PlayerData
 

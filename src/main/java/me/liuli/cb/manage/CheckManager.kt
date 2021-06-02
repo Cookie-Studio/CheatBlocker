@@ -11,10 +11,10 @@ import me.liuli.cb.checks.PacketCheck
 import me.liuli.cb.checks.impl.move.MoveY1
 
 class CheckManager {
-    private val moveChecks=mutableListOf<MoveCheck>()
-    private val packetChecks=mutableListOf<PacketCheck>()
+    private val moveChecks = mutableListOf<MoveCheck>()
+    private val packetChecks = mutableListOf<PacketCheck>()
 
-    private val playerManager=CheatBlocker.getInstance().playerManager;
+    private val playerManager = CheatBlocker.getInstance().playerManager;
 
     init {
         registerChecks(
@@ -23,7 +23,7 @@ class CheckManager {
     }
 
     @SafeVarargs
-    private fun registerChecks(vararg checks: Class<out Check>){
+    private fun registerChecks(vararg checks: Class<out Check>) {
         checks.forEach(this::registerCheck)
     }
 
@@ -33,38 +33,38 @@ class CheckManager {
     }
 
     private fun registerCheck(check: Check) {
-        if(check is MoveCheck){
+        if (check is MoveCheck) {
             moveChecks.add(check)
-        }else if(check is PacketCheck){
+        } else if (check is PacketCheck) {
             packetChecks.add(check)
-        }else{
+        } else {
             throw IllegalStateException("Illegal check type: ${check.javaClass.name}")
         }
     }
 
-    fun handlePlayerJoin(event: PlayerJoinEvent){
-        val data=playerManager.addPlayer(event.player)
-        moveChecks.forEach{ it.onPlayerJoin(data) }
-        packetChecks.forEach{ it.onPlayerJoin(data) }
+    fun handlePlayerJoin(event: PlayerJoinEvent) {
+        val data = playerManager.addPlayer(event.player)
+        moveChecks.forEach { it.onPlayerJoin(data) }
+        packetChecks.forEach { it.onPlayerJoin(data) }
     }
 
-    fun handlePlayerLeave(event: PlayerQuitEvent){
-        val data=playerManager.getPlayer(event.player) ?: return
-        moveChecks.forEach{ it.onPlayerLeave(data) }
-        packetChecks.forEach{ it.onPlayerLeave(data) }
+    fun handlePlayerLeave(event: PlayerQuitEvent) {
+        val data = playerManager.getPlayer(event.player) ?: return
+        moveChecks.forEach { it.onPlayerLeave(data) }
+        packetChecks.forEach { it.onPlayerLeave(data) }
         playerManager.removePlayer(event.player)
     }
 
-    fun handlePacketIn(event: DataPacketReceiveEvent):Boolean{
+    fun handlePacketIn(event: DataPacketReceiveEvent): Boolean {
         return false
     }
 
-    fun handlePacketOut(event: DataPacketSendEvent):Boolean{
+    fun handlePacketOut(event: DataPacketSendEvent): Boolean {
         return false
     }
 
-    fun handleUpdate(){
-        moveChecks.forEach{ it.onTick() }
-        packetChecks.forEach{ it.onTick() }
+    fun handleUpdate() {
+        moveChecks.forEach { it.onTick() }
+        packetChecks.forEach { it.onTick() }
     }
 }

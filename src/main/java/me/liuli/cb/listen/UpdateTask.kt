@@ -4,7 +4,7 @@ import cn.nukkit.scheduler.Task
 import me.liuli.cb.CheatBlocker
 
 class UpdateTask : Task() {
-    private val checkManager= CheatBlocker.getInstance().checkManager
+    private val checkManager = CheatBlocker.getInstance().checkManager
 
     override fun onRun(tick: Int) {
         checkManager.handleUpdate()
