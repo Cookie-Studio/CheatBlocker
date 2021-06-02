@@ -8,7 +8,7 @@ import cn.nukkit.event.server.DataPacketSendEvent
 import me.liuli.cb.CheatBlocker
 
 class PacketListener : Listener {
-    private val checkManager= CheatBlocker.getInstance().checkManager
+    private val checkManager=CheatBlocker.getInstance().checkManager
 
     @EventHandler(priority = EventPriority.HIGHEST)
     fun onPacketReceive(event: DataPacketReceiveEvent){

@@ -9,9 +9,11 @@ import me.liuli.cb.listen.PlayerListener;
 import me.liuli.cb.listen.UpdateTask;
 import me.liuli.cb.manage.CheckManager;
 import me.liuli.cb.manage.ConfigManager;
+import me.liuli.cb.manage.PlayerManager;
 
 public class CheatBlocker extends PluginBase {
     public static String name="CheatBlocker";
+    public static String shortName="cb";
     public static String coloredName="§eCheat§cBlocker";
 
     private static CheatBlocker instance;
@@ -19,6 +21,7 @@ public class CheatBlocker extends PluginBase {
 
     private CheckManager checkManager;
     private ConfigManager configManager;
+    private PlayerManager playerManager;
 
     @Override
     public void onEnable(){
@@ -38,9 +41,9 @@ public class CheatBlocker extends PluginBase {
         checkManager=new CheckManager();
 
         // register perms
-        pm.addPermission(new Permission("atb.check.bypass.packet","Bypass AntiToolBox Packet Checks",Permission.DEFAULT_OP));
-        pm.addPermission(new Permission("atb.check.bypass.move","Bypass AntiToolBox Move Checks",Permission.DEFAULT_OP));
-        pm.addPermission(new Permission("atb.command", "Use /atb command", Permission.DEFAULT_OP));
+        pm.addPermission(new Permission(shortName+".check.bypass.packet","Bypass "+name+" Packet Checks",Permission.DEFAULT_OP));
+        pm.addPermission(new Permission(shortName+".check.bypass.move","Bypass "+name+" Move Checks",Permission.DEFAULT_OP));
+        pm.addPermission(new Permission(shortName+".command", "Use /"+shortName+" command", Permission.DEFAULT_OP));
 
         // register listener
         this.getServer().getScheduler().scheduleRepeatingTask(new UpdateTask(), 1, false);
@@ -64,5 +67,9 @@ public class CheatBlocker extends PluginBase {
 
     public ConfigManager getConfigManager() {
         return configManager;
+    }
+
+    public PlayerManager getPlayerManager() {
+        return playerManager;
     }
 }

@@ -5,7 +5,7 @@ import me.liuli.cb.CheatBlocker
 import me.liuli.cb.utils.FileUtils
 import java.io.File
 
-open class ATBConfig(configName: String) {
+open class TheConfig(configName: String) {
     val config: Config
 
     init {

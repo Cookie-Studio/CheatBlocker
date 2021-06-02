@@ -1,7 +1,17 @@
-# --- AntiToolBox by Liuli ---
-# Hey! Thanks for choose AntiToolBox!
+# --- CheckBlocker by Liuli ---
+# Hey! Thanks for choose CheckBlocker!
+#   This plugin can help you block cheaters on your server.
+#   If lots cheaters on your server and you cant to ban it quickly, this plugin is the right choose!
+#   If the plugin is not suitable for your server, you can change settings to make this plugin suit your server
+#   I hope that CheatBlocker will perform well and live up to your expectations.
 
 move:
+  enabled: true
+
+  mitigation:
+    enabled: true
+    min_vl: 20
+
   y-motion:
     test: "TEST STRING"
     vl: 1
