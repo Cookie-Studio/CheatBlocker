@@ -1,0 +1,12 @@
+# This file is for AntiToolBox's autopunish system
+expiration_time: 7
+expiration_time_unit: DAYS # DAYS,
+threshold: 5 # amounts of a kick will cause ban (-1 to disable autopunish)
+# command varables: %player% %time_ms% %time% %time_unit%
+# execute at every kick
+kick_commands:
+  - "atb broadcast %player% was kicked for unfair advantages"
+# execute at every punish
+punish_commands:
+  - "atb notify Mock Ban issued for %player%. Configure in punish.yml"
+  - "atb broadcast %player% was banned for unfair advantages"

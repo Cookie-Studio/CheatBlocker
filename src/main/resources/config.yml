@@ -1,2 +1,7 @@
 # --- AntiToolBox by Liuli ---
 # Hey! Thanks for choose AntiToolBox!
+
+move:
+  y-motion:
+    test: "TEST STRING"
+    vl: 1

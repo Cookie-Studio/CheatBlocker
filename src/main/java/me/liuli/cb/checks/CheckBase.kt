@@ -1,6 +1,6 @@
-package me.liuli.atb.checks
+package me.liuli.cb.checks
 
-abstract class CheckBase {
+abstract class CheckBase(val type: CheckType, val subCheck: String) {
     // called every tick
     open fun onTick() {
 

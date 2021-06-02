@@ -1,5 +1,5 @@
-name: AntiToolBox
-main: me.liuli.atb.AntiToolBox
+name: CheatBlocker
+main: me.liuli.cb.CheatBlocker
 version: "1.0"
 api: ["1.0.0"]
 author: "Liulihaocai"
