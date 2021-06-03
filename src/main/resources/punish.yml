@@ -1,20 +1,23 @@
 # This file is for CheatBlocker's autopunish system
 expiration_time: 7
-expiration_time_unit: DAYS # DAYS,
+expiration_time_unit: DAYS # SECONDS,MINUTES,HOURS,DAYS and more in java TimeUnit
+kick_default_reason: "Hack"
 ban_default_reason: "Hack"
+ban_with_ip: true
 threshold: 5 # amounts of a kick will cause ban (-1 to disable autopunish)
 # command variables: %player% %playerIp% %time_ms% %time% %time_unit%
 # execute at every kick
 kick_commands:
-  - "atb broadcast %player% was kicked for unfair advantages"
+  - "cb kick %player%"
+  - "cb broadcast %player% was kicked for unfair advantages"
 # execute at every punish
-punish_commands:
-  - "atb ban %player% Unfair advantages"
-  - "atb broadcast %player% was banned for unfair advantages"
+ban_commands:
+  - "cb ban %player%"
+  - "cb broadcast %player% was banned for unfair advantages"
 
-# UI variables: %player% %playerIp% %operator% %reason% %expiration_last% %expiration_time%
+# UI variables: %player% %playerIp% %operator% %reason% %expired_last% %expired_time%
 kick_ui:
-  - "Você foi chutado"
+  - "§cVocê foi chutado"
   - "por %operator%"
   - "Motivo: %reason%"
   - "§eCheat§cBlocker"
@@ -22,9 +25,10 @@ kick_ui:
 ban_ui:
   - "§cVocê está banido"
   - "por %operator%"
+  - "Expired at: %expired_last%"
   - "Motivo: %reason%"
   - "§eCheat§cBlocker"
 
 ban_ip_ui:
-  - "Seu IP(%playerIp%) foi proibido para este servidor"
+  - "§cSeu IP(%playerIp%) foi proibido para este servidor"
   - "§eCheat§cBlocker"

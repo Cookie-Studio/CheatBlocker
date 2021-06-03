@@ -9,9 +9,13 @@ import me.liuli.cb.CheatBlocker
 
 class PlayerListener : Listener {
     private val checkManager = CheatBlocker.getInstance().checkManager
+    private val punishManager = CheatBlocker.getInstance().punishManager
 
     @EventHandler(priority = EventPriority.HIGHEST)
     fun onPlayerJoin(event: PlayerJoinEvent) {
+        if(punishManager.checkPlayer(event.player)){
+            return
+        }
         checkManager.handlePlayerJoin(event)
     }
 

@@ -14,7 +14,7 @@ class CheckManager {
     private val moveChecks = mutableListOf<MoveCheck>()
     private val packetChecks = mutableListOf<PacketCheck>()
 
-    private val playerManager = CheatBlocker.getInstance().playerManager;
+    private val playerManager = CheatBlocker.getInstance().playerManager
 
     init {
         registerChecks(

@@ -4,14 +4,15 @@ import cn.nukkit.permission.Permission;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.plugin.PluginLogger;
 import cn.nukkit.plugin.PluginManager;
-import me.liuli.cb.listen.command.CommandListener;
 import me.liuli.cb.listen.PacketListener;
 import me.liuli.cb.listen.PlayerListener;
 import me.liuli.cb.listen.UpdateTask;
+import me.liuli.cb.listen.command.CommandListener;
 import me.liuli.cb.listen.command.SubCommandListener;
 import me.liuli.cb.manage.CheckManager;
 import me.liuli.cb.manage.ConfigManager;
 import me.liuli.cb.manage.PlayerManager;
+import me.liuli.cb.manage.PunishManager;
 
 public class CheatBlocker extends PluginBase {
     public static String name = "CheatBlocker";
@@ -28,6 +29,7 @@ public class CheatBlocker extends PluginBase {
     private CheckManager checkManager;
     private ConfigManager configManager;
     private PlayerManager playerManager;
+    private PunishManager punishManager;
 
     public static CheatBlocker getInstance() {
         return instance;
@@ -52,6 +54,8 @@ public class CheatBlocker extends PluginBase {
 
         // init functions
         configManager = new ConfigManager();
+        playerManager = new PlayerManager();
+        punishManager = new PunishManager();
         checkManager = new CheckManager();
 
         // register perms
@@ -82,5 +86,9 @@ public class CheatBlocker extends PluginBase {
 
     public PlayerManager getPlayerManager() {
         return playerManager;
+    }
+
+    public PunishManager getPunishManager() {
+        return punishManager;
     }
 }
