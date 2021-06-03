@@ -1,12 +1,30 @@
-# This file is for AntiToolBox's autopunish system
+# This file is for CheatBlocker's autopunish system
 expiration_time: 7
 expiration_time_unit: DAYS # DAYS,
+ban_default_reason: "Hack"
 threshold: 5 # amounts of a kick will cause ban (-1 to disable autopunish)
-# command varables: %player% %time_ms% %time% %time_unit%
+# command variables: %player% %playerIp% %time_ms% %time% %time_unit%
 # execute at every kick
 kick_commands:
   - "atb broadcast %player% was kicked for unfair advantages"
 # execute at every punish
 punish_commands:
-  - "atb notify Mock Ban issued for %player%. Configure in punish.yml"
+  - "atb ban %player% Unfair advantages"
   - "atb broadcast %player% was banned for unfair advantages"
+
+# UI variables: %player% %playerIp% %operator% %reason% %expiration_last% %expiration_time%
+kick_ui:
+  - "Você foi chutado"
+  - "por %operator%"
+  - "Motivo: %reason%"
+  - "§eCheat§cBlocker"
+
+ban_ui:
+  - "§cVocê está banido"
+  - "por %operator%"
+  - "Motivo: %reason%"
+  - "§eCheat§cBlocker"
+
+ban_ip_ui:
+  - "Seu IP(%playerIp%) foi proibido para este servidor"
+  - "§eCheat§cBlocker"
