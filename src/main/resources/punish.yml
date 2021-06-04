@@ -3,14 +3,16 @@ expiration_time: 7
 expiration_time_unit: DAYS # SECONDS,MINUTES,HOURS,DAYS and more in java TimeUnit
 kick_default_reason: "Hack"
 ban_default_reason: "Hack"
+ban_ip_chain_reason: ":)"
 ban_with_ip: true
+ip_ban_chain: true # this will ban the player try to login on a banned ip
 threshold: 5 # amounts of a kick will cause ban (-1 to disable autopunish)
 # command variables: %player% %playerIp% %time_ms% %time% %time_unit%
 # execute at every kick
 kick_commands:
   - "cb kick %player%"
   - "cb broadcast %player% was kicked for unfair advantages"
-# execute at every punish
+# execute at every ban
 ban_commands:
   - "cb ban %player%"
   - "cb broadcast %player% was banned for unfair advantages"

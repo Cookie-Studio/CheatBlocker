@@ -12,8 +12,13 @@ class BanCommand : TheCommand("ban","ban a player","<player> [<reason> <time> <t
             defaultSyntax(commandSender)
             return
         }
-        val punishConfig= CheatBlocker.getInstance().configManager.punishConfig
+        val punishConfig=CheatBlocker.getInstance().configManager.punishConfig
         val punishManager=CheatBlocker.getInstance().punishManager
+
+        if(!punishManager.dataExists(args[0])){
+            message(commandSender,"Player not exists!")
+            return
+        }
 
         val data=punishManager.getOrCreateData(args[0])
         var reason=punishConfig.banDefaultReason

@@ -16,8 +16,14 @@ public class PunishConfig extends TheConfig {
     @ConfigField(yamlSection = "ban_default_reason")
     public String banDefaultReason;
 
+    @ConfigField(yamlSection = "ban_ip_chain_reason")
+    public String banIPChainReason;
+
     @ConfigField(yamlSection = "ban_with_ip")
     public boolean banWithIP;
+
+    @ConfigField(yamlSection = "ip_ban_chain")
+    public boolean banIPChain;
 
     @ConfigField(yamlSection = "threshold")
     public int threshold;

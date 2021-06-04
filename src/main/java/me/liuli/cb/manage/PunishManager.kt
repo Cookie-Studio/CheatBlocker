@@ -4,6 +4,7 @@ import cn.nukkit.Player
 import cn.nukkit.Server
 import cn.nukkit.utils.Config
 import me.liuli.cb.CheatBlocker
+import me.liuli.cb.utils.AntiCheatCommandSender
 import me.liuli.cb.utils.PlayerUtils
 import me.liuli.cb.utils.StringUtils
 import java.io.File
@@ -12,6 +13,7 @@ import java.util.*
 
 class PunishManager {
     private val punishConfig=CheatBlocker.getInstance().configManager.punishConfig
+    private val logger=CheatBlocker.getTheLogger()
 
     private val baseFolder: File
     private val playersFolder: File
@@ -27,18 +29,25 @@ class PunishManager {
         val player=Server.getInstance().getPlayer(name) ?: return false
         val data=getOrCreateData(name)
         data["kicked_times"]=(data["kicked_times"] as Int)+1
+        data.save()
         // check can ban
         var ban=false
         if((data["kicked_times"] as Int) >= punishConfig.threshold){
 //            banPlayer(data,reason = reason,operator = operator)
             val server=Server.getInstance()
             punishConfig.banCommands.forEach{
-                server.dispatchCommand(server.consoleSender,it)
+                server.dispatchCommand(AntiCheatCommandSender(operator),it.replace("%player%",player.name)
+                    .replace("%playerIp%",player.address)
+                    .replace("%time_ms%",punishConfig.banTime.toString())
+                    .replace("%time%",punishConfig.expirationTime.toString())
+                    .replace("%time_unit%",punishConfig.expirationTimeUnit))
             }
-            ban=checkPlayer(player,data)
+            // reload data after command modify
+            data.reload()
+            ban=true
+            checkPlayer(player,data)
+            logger.warning("${player.name} banned (Reached ban VL)")
         }
-        // finally save data
-        data.save()
 
         if(!ban){
             var str=""
@@ -50,6 +59,7 @@ class PunishManager {
                 str+="\n"
             }
             PlayerUtils.kickPlayerUsePacket(player,str)
+            logger.warning("${player.name} kicked. Ban VL ${data["kicked_times"] as Int}/${punishConfig.threshold}")
         }
 
         return true
@@ -103,6 +113,13 @@ class PunishManager {
                         .replace("%expired_time%", expiredTime)
                     str += "\n"
                 }
+                // chain ban
+                if(punishConfig.banIPChain){
+                    banPlayer(data,reason = punishConfig.banIPChainReason,time = expired,operator = (ipData["ban_operator"] as String))
+                    checkPlayer(player, data)
+                    logger.warning("${player.name} chain banned. IP: ${player.address}")
+                    return true
+                }
                 PlayerUtils.kickPlayerUsePacket(player, str)
                 return true
             }else{
@@ -153,6 +170,10 @@ class PunishManager {
         data["kicked_times"]=0
 
         return data
+    }
+
+    fun dataExists(name: String):Boolean{
+        return File(playersFolder,"${name.toLowerCase()}.yml").exists()
     }
 
     fun unbanPlayer(name: String):Int{

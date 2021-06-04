@@ -10,10 +10,16 @@ class KickCommand : TheCommand("kick","kick players","<player> [<reason>]") {
             defaultSyntax(commandSender)
             return
         }
+        var result=false
         if(args.size>1){
-            CheatBlocker.getInstance().punishManager.kickPlayer(args[0],reason = args[1],operator = commandSender.name)
+            result=CheatBlocker.getInstance().punishManager.kickPlayer(args[0],reason = args[1],operator = commandSender.name)
         }else{
-            CheatBlocker.getInstance().punishManager.kickPlayer(args[0],operator = commandSender.name)
+            result=CheatBlocker.getInstance().punishManager.kickPlayer(args[0],operator = commandSender.name)
+        }
+        if(result){
+            message(commandSender,"Player kicked.")
+        }else{
+            message(commandSender,"Player not exist.")
         }
     }
 }

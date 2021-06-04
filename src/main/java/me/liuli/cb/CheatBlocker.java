@@ -13,6 +13,7 @@ import me.liuli.cb.manage.CheckManager;
 import me.liuli.cb.manage.ConfigManager;
 import me.liuli.cb.manage.PlayerManager;
 import me.liuli.cb.manage.PunishManager;
+import me.liuli.cb.utils.AntiCheatCommandSender;
 
 public class CheatBlocker extends PluginBase {
     public static String name = "CheatBlocker";
@@ -30,6 +31,7 @@ public class CheatBlocker extends PluginBase {
     private ConfigManager configManager;
     private PlayerManager playerManager;
     private PunishManager punishManager;
+    private AntiCheatCommandSender commandSender;
 
     public static CheatBlocker getInstance() {
         return instance;
@@ -90,5 +92,9 @@ public class CheatBlocker extends PluginBase {
 
     public PunishManager getPunishManager() {
         return punishManager;
+    }
+
+    public AntiCheatCommandSender getCommandSender() {
+        return commandSender; // TODO: use it at every anticheat kick
     }
 }
