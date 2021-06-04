@@ -47,10 +47,10 @@ public class PunishConfig extends TheConfig {
 
     public PunishConfig() {
         super("punish.yml");
-        if(expirationTime<=0){
-            banTime=-1;
-        }else{
-            banTime=TimeUnit.MILLISECONDS.convert(expirationTime,TimeUnit.valueOf(expirationTimeUnit.toUpperCase()));
+        if (expirationTime <= 0) {
+            banTime = -1;
+        } else {
+            banTime = TimeUnit.MILLISECONDS.convert(expirationTime, TimeUnit.valueOf(expirationTimeUnit.toUpperCase()));
         }
     }
 }

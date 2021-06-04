@@ -19,14 +19,11 @@ public class CheatBlocker extends PluginBase {
     public static String name = "CheatBlocker";
     public static String shortName = "cb";
     public static String coloredName = "§eCheat§cBlocker";
-
-    public Permission PERM_CHECK_BYPASS_PACKET=new Permission(shortName+".check.bypass.packet", "Bypass " + name + " Packet Checks", Permission.DEFAULT_OP);
-    public Permission PERM_CHECK_BYPASS_MOVE=new Permission(shortName+".check.bypass.move", "Bypass " + name + " Move Checks", Permission.DEFAULT_OP);
-    public Permission PERM_COMMAND=new Permission(shortName+".command", "Use /" + shortName + " command", Permission.DEFAULT_OP);
-
     private static CheatBlocker instance;
     private static PluginLogger theLogger;
-
+    public Permission PERM_CHECK_BYPASS_PACKET = new Permission(shortName + ".check.bypass.packet", "Bypass " + name + " Packet Checks", Permission.DEFAULT_OP);
+    public Permission PERM_CHECK_BYPASS_MOVE = new Permission(shortName + ".check.bypass.move", "Bypass " + name + " Move Checks", Permission.DEFAULT_OP);
+    public Permission PERM_COMMAND = new Permission(shortName + ".command", "Use /" + shortName + " command", Permission.DEFAULT_OP);
     private CheckManager checkManager;
     private ConfigManager configManager;
     private PlayerManager playerManager;
@@ -66,9 +63,9 @@ public class CheatBlocker extends PluginBase {
         pm.addPermission(PERM_COMMAND);
 
         // register command
-        CommandListener commandListener=new CommandListener(shortName,"Command of "+name);
+        CommandListener commandListener = new CommandListener(shortName, "Command of " + name);
         this.getServer().getCommandMap().register(shortName, commandListener);
-        this.getServer().getCommandMap().register(name.toLowerCase(), new SubCommandListener(name.toLowerCase(),commandListener));
+        this.getServer().getCommandMap().register(name.toLowerCase(), new SubCommandListener(name.toLowerCase(), commandListener));
 
         // register listener
         this.getServer().getScheduler().scheduleRepeatingTask(new UpdateTask(), 1, false);

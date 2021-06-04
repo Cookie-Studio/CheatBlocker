@@ -30,7 +30,7 @@ class PacketListener : Listener {
     fun onPacketReceive(event: DataPacketReceiveEvent) {
         event.player ?: return
 
-        if(PlayerUtils.blockList.contains(event.player.uniqueId)) {
+        if (PlayerUtils.blockList.contains(event.player.uniqueId)) {
             event.setCancelled()
             return
         }
@@ -44,7 +44,7 @@ class PacketListener : Listener {
     fun onPacketSend(event: DataPacketSendEvent) {
         event.player ?: return
 
-        if(PlayerUtils.blockList.contains(event.player.uniqueId)&&event.packet !is DisconnectPacket) {
+        if (PlayerUtils.blockList.contains(event.player.uniqueId) && event.packet !is DisconnectPacket) {
             event.setCancelled()
             return
         }

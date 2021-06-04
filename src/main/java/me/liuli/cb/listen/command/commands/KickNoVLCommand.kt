@@ -4,7 +4,7 @@ import cn.nukkit.command.CommandSender
 import me.liuli.cb.CheatBlocker
 import me.liuli.cb.listen.command.TheCommand
 
-class KickCommand : TheCommand("kick", "kick players", "<player> [<reason>]") {
+class KickNoVLCommand : TheCommand("kicknovl", "kick a player without vl increase", "<player> [<reason>]") {
     override fun exec(commandSender: CommandSender, args: Array<String>) {
         if (args.isEmpty()) {
             defaultSyntax(commandSender)
@@ -12,13 +12,13 @@ class KickCommand : TheCommand("kick", "kick players", "<player> [<reason>]") {
         }
         val result: Boolean
         if (args.size > 1) {
-            result = CheatBlocker.getInstance().punishManager.kickPlayer(
+            result = CheatBlocker.getInstance().punishManager.kickPlayerNoVL(
                 args[0],
                 reason = args[1],
                 operator = commandSender.name
             )
         } else {
-            result = CheatBlocker.getInstance().punishManager.kickPlayer(args[0], operator = commandSender.name)
+            result = CheatBlocker.getInstance().punishManager.kickPlayerNoVL(args[0], operator = commandSender.name)
         }
         if (result) {
             message(commandSender, "Player kicked.")
